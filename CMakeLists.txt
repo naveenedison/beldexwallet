@@ -12,9 +12,9 @@ set(CRYPTONOTE_LIB cryptonote)
 
 include_directories(${CMAKE_BINARY_DIR}
     src
-    beldexcoin/external
-    beldexcoin/include
-    beldexcoin/src)
+    cryptonote/external
+    cryptonote/include
+    cryptonote/src)
 
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -35,7 +35,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
 set(VERSION "")
-configure_file("beldexcoin/src/version.h.in" "version.h")
+configure_file("cryptonote/src/version.h.in" "version.h")
 configure_file("src/CryptoNoteWalletConfig.h.in" "CryptoNoteWalletConfig.h")
 
 add_definitions(-DGIT_REVISION=\"${GIT_REVISION}\")
@@ -43,130 +43,130 @@ add_definitions(-DGIT_REVISION=\"${GIT_REVISION}\")
 set(CMAKE_AUTOMOC ON)
 
 set(CRYPTONOTE_SOURCES
-  beldexcoin/external/miniupnpc/connecthostport.c
-  beldexcoin/external/miniupnpc/igd_desc_parse.c
-  beldexcoin/external/miniupnpc/minisoap.c
-  beldexcoin/external/miniupnpc/miniupnpc.c
-  beldexcoin/external/miniupnpc/miniwget.c
-  beldexcoin/external/miniupnpc/minixml.c
-  beldexcoin/external/miniupnpc/portlistingparse.c
-  beldexcoin/external/miniupnpc/receivedata.c
-  beldexcoin/external/miniupnpc/upnpcommands.c
-  beldexcoin/external/miniupnpc/upnpreplyparse.c
-  beldexcoin/src/Common/Base58.cpp
-  beldexcoin/src/Common/CommandLine.cpp
-  beldexcoin/src/Common/Util.cpp
-  beldexcoin/src/Common/StringTools.cpp
-  beldexcoin/src/Common/JsonValue.cpp
-  beldexcoin/src/Common/ConsoleTools.cpp
-  beldexcoin/src/Common/MemoryInputStream.cpp
-  beldexcoin/src/Common/PathTools.cpp
-  beldexcoin/src/Common/StdInputStream.cpp
-  beldexcoin/src/Common/StdOutputStream.cpp
-  beldexcoin/src/Common/StreamTools.cpp
-  beldexcoin/src/Common/StringOutputStream.cpp
-  beldexcoin/src/Common/StringView.cpp
-  beldexcoin/src/Common/VectorOutputStream.cpp
-  beldexcoin/src/crypto/blake256.c
-  beldexcoin/src/crypto/chacha8.c
-  beldexcoin/src/crypto/crypto-ops-data.c
-  beldexcoin/src/crypto/crypto-ops.c
-  beldexcoin/src/crypto/crypto.cpp
-  beldexcoin/src/crypto/groestl.c
-  beldexcoin/src/crypto/hash-extra-blake.c
-  beldexcoin/src/crypto/hash-extra-groestl.c
-  beldexcoin/src/crypto/hash-extra-jh.c
-  beldexcoin/src/crypto/hash-extra-skein.c
-  beldexcoin/src/crypto/hash.c
-  beldexcoin/src/crypto/jh.c
-  beldexcoin/src/crypto/keccak.c
-  beldexcoin/src/crypto/oaes_lib.c
-  beldexcoin/src/crypto/random.c
-  beldexcoin/src/crypto/skein.c
-  beldexcoin/src/crypto/slow-hash.c
-  beldexcoin/src/crypto/slow-hash.cpp
-  beldexcoin/src/crypto/tree-hash.c
-  beldexcoin/src/CryptoNoteCore/BlockchainIndices.cpp
-  beldexcoin/src/CryptoNoteCore/BlockchainMessages.cpp
-  beldexcoin/src/CryptoNoteCore/BlockIndex.cpp
-  beldexcoin/src/CryptoNoteCore/CoreConfig.cpp
-  beldexcoin/src/CryptoNoteCore/CryptoNoteBasic.cpp
-  beldexcoin/src/CryptoNoteCore/CryptoNoteTools.cpp
-  beldexcoin/src/CryptoNoteCore/Currency.cpp
-  beldexcoin/src/CryptoNoteCore/MinerConfig.cpp
-  beldexcoin/src/CryptoNoteCore/Transaction.cpp
-  beldexcoin/src/CryptoNoteCore/Account.cpp
-  beldexcoin/src/CryptoNoteCore/Blockchain.cpp
-  beldexcoin/src/CryptoNoteCore/Checkpoints.cpp
-  beldexcoin/src/CryptoNoteCore/CryptoNoteBasicImpl.cpp
-  beldexcoin/src/CryptoNoteCore/Core.cpp
-  beldexcoin/src/CryptoNoteCore/CryptoNoteFormatUtils.cpp
-  beldexcoin/src/CryptoNoteCore/CryptoNoteSerialization.cpp
-  beldexcoin/src/CryptoNoteCore/Difficulty.cpp
-  beldexcoin/src/CryptoNoteCore/IBlock.cpp
-  beldexcoin/src/CryptoNoteCore/Miner.cpp
-  beldexcoin/src/CryptoNoteCore/TransactionExtra.cpp
-  beldexcoin/src/CryptoNoteCore/TransactionPool.cpp
-  beldexcoin/src/CryptoNoteCore/TransactionPrefixImpl.cpp
-  beldexcoin/src/CryptoNoteCore/TransactionUtils.cpp
-  beldexcoin/src/InProcessNode/InProcessNode.cpp
-  beldexcoin/src/InProcessNode/InProcessNodeErrors.cpp
-  beldexcoin/src/NodeRpcProxy/NodeErrors.cpp
-  beldexcoin/src/NodeRpcProxy/NodeRpcProxy.cpp
-  beldexcoin/src/P2p/NetNodeConfig.cpp
-  beldexcoin/src/Serialization/BinaryInputStreamSerializer.cpp
-  beldexcoin/src/Serialization/BinaryOutputStreamSerializer.cpp
-  beldexcoin/src/Serialization/JsonInputValueSerializer.cpp
-  beldexcoin/src/Serialization/JsonOutputStreamSerializer.cpp
-  beldexcoin/src/Serialization/KVBinaryInputStreamSerializer.cpp
-  beldexcoin/src/Serialization/KVBinaryOutputStreamSerializer.cpp
-  beldexcoin/src/Serialization/SerializationOverloads.cpp
-  beldexcoin/src/Transfers/BlockchainSynchronizer.cpp
-  beldexcoin/src/Transfers/SynchronizationState.cpp
-  beldexcoin/src/Transfers/TransfersConsumer.cpp
-  beldexcoin/src/Transfers/TransfersContainer.cpp
-  beldexcoin/src/Transfers/TransfersSubscription.cpp
-  beldexcoin/src/Transfers/TransfersSynchronizer.cpp
-  beldexcoin/src/Wallet/LegacyKeysImporter.cpp
-  beldexcoin/src/Wallet/WalletAsyncContextCounter.cpp
-  beldexcoin/src/Wallet/WalletErrors.cpp
-  beldexcoin/src/WalletLegacy/KeysStorage.cpp
-  beldexcoin/src/WalletLegacy/WalletLegacy.cpp
-  beldexcoin/src/WalletLegacy/WalletHelper.cpp
-  beldexcoin/src/WalletLegacy/WalletLegacySerializer.cpp
-  beldexcoin/src/WalletLegacy/WalletLegacySerialization.cpp
-  beldexcoin/src/WalletLegacy/WalletTransactionSender.cpp
-  beldexcoin/src/WalletLegacy/WalletUnconfirmedTransactions.cpp
-  beldexcoin/src/WalletLegacy/WalletUserTransactionsCache.cpp
-  beldexcoin/src/System/ContextGroup.cpp
-  beldexcoin/src/System/Event.cpp
-  beldexcoin/src/System/EventLock.cpp
-  beldexcoin/src/System/InterruptedException.cpp
-  beldexcoin/src/System/Ipv4Address.cpp
-  beldexcoin/src/System/TcpStream.cpp
-  beldexcoin/src/HTTP/HttpRequest.cpp
-  beldexcoin/src/HTTP/HttpParser.cpp
-  beldexcoin/src/HTTP/HttpParserErrorCodes.cpp
-  beldexcoin/src/HTTP/HttpResponse.cpp
-  beldexcoin/src/Rpc/HttpClient.cpp
-  beldexcoin/src/Rpc/JsonRpc.cpp
-  beldexcoin/src/P2p/NetNode.cpp
-  beldexcoin/src/P2p/LevinProtocol.cpp
-  beldexcoin/src/P2p/NetNodeConfig.cpp
-  beldexcoin/src/P2p/PeerListManager.cpp
-  beldexcoin/src/CryptoNoteProtocol/CryptoNoteProtocolHandler.cpp
-  beldexcoin/src/Logging/ILogger.cpp
-  beldexcoin/src/Logging/LoggerGroup.cpp
-  beldexcoin/src/Logging/CommonLogger.cpp
-  beldexcoin/src/Logging/LoggerManager.cpp
-  beldexcoin/src/Logging/FileLogger.cpp
-  beldexcoin/src/Logging/StreamLogger.cpp
-  beldexcoin/src/Logging/ConsoleLogger.cpp
-  beldexcoin/src/Logging/LoggerMessage.cpp
-  beldexcoin/src/Logging/LoggerRef.cpp
-  beldexcoin/src/BlockchainExplorer/BlockchainExplorer.cpp
-  beldexcoin/src/BlockchainExplorer/BlockchainExplorerDataBuilder.cpp
-  beldexcoin/src/BlockchainExplorer/BlockchainExplorerErrors.cpp
+  cryptonote/external/miniupnpc/connecthostport.c
+  cryptonote/external/miniupnpc/igd_desc_parse.c
+  cryptonote/external/miniupnpc/minisoap.c
+  cryptonote/external/miniupnpc/miniupnpc.c
+  cryptonote/external/miniupnpc/miniwget.c
+  cryptonote/external/miniupnpc/minixml.c
+  cryptonote/external/miniupnpc/portlistingparse.c
+  cryptonote/external/miniupnpc/receivedata.c
+  cryptonote/external/miniupnpc/upnpcommands.c
+  cryptonote/external/miniupnpc/upnpreplyparse.c
+  cryptonote/src/Common/Base58.cpp
+  cryptonote/src/Common/CommandLine.cpp
+  cryptonote/src/Common/Util.cpp
+  cryptonote/src/Common/StringTools.cpp
+  cryptonote/src/Common/JsonValue.cpp
+  cryptonote/src/Common/ConsoleTools.cpp
+  cryptonote/src/Common/MemoryInputStream.cpp
+  cryptonote/src/Common/PathTools.cpp
+  cryptonote/src/Common/StdInputStream.cpp
+  cryptonote/src/Common/StdOutputStream.cpp
+  cryptonote/src/Common/StreamTools.cpp
+  cryptonote/src/Common/StringOutputStream.cpp
+  cryptonote/src/Common/StringView.cpp
+  cryptonote/src/Common/VectorOutputStream.cpp
+  cryptonote/src/crypto/blake256.c
+  cryptonote/src/crypto/chacha8.c
+  cryptonote/src/crypto/crypto-ops-data.c
+  cryptonote/src/crypto/crypto-ops.c
+  cryptonote/src/crypto/crypto.cpp
+  cryptonote/src/crypto/groestl.c
+  cryptonote/src/crypto/hash-extra-blake.c
+  cryptonote/src/crypto/hash-extra-groestl.c
+  cryptonote/src/crypto/hash-extra-jh.c
+  cryptonote/src/crypto/hash-extra-skein.c
+  cryptonote/src/crypto/hash.c
+  cryptonote/src/crypto/jh.c
+  cryptonote/src/crypto/keccak.c
+  cryptonote/src/crypto/oaes_lib.c
+  cryptonote/src/crypto/random.c
+  cryptonote/src/crypto/skein.c
+  cryptonote/src/crypto/slow-hash.c
+  cryptonote/src/crypto/slow-hash.cpp
+  cryptonote/src/crypto/tree-hash.c
+  cryptonote/src/CryptoNoteCore/BlockchainIndices.cpp
+  cryptonote/src/CryptoNoteCore/BlockchainMessages.cpp
+  cryptonote/src/CryptoNoteCore/BlockIndex.cpp
+  cryptonote/src/CryptoNoteCore/CoreConfig.cpp
+  cryptonote/src/CryptoNoteCore/CryptoNoteBasic.cpp
+  cryptonote/src/CryptoNoteCore/CryptoNoteTools.cpp
+  cryptonote/src/CryptoNoteCore/Currency.cpp
+  cryptonote/src/CryptoNoteCore/MinerConfig.cpp
+  cryptonote/src/CryptoNoteCore/Transaction.cpp
+  cryptonote/src/CryptoNoteCore/Account.cpp
+  cryptonote/src/CryptoNoteCore/Blockchain.cpp
+  cryptonote/src/CryptoNoteCore/Checkpoints.cpp
+  cryptonote/src/CryptoNoteCore/CryptoNoteBasicImpl.cpp
+  cryptonote/src/CryptoNoteCore/Core.cpp
+  cryptonote/src/CryptoNoteCore/CryptoNoteFormatUtils.cpp
+  cryptonote/src/CryptoNoteCore/CryptoNoteSerialization.cpp
+  cryptonote/src/CryptoNoteCore/Difficulty.cpp
+  cryptonote/src/CryptoNoteCore/IBlock.cpp
+  cryptonote/src/CryptoNoteCore/Miner.cpp
+  cryptonote/src/CryptoNoteCore/TransactionExtra.cpp
+  cryptonote/src/CryptoNoteCore/TransactionPool.cpp
+  cryptonote/src/CryptoNoteCore/TransactionPrefixImpl.cpp
+  cryptonote/src/CryptoNoteCore/TransactionUtils.cpp
+  cryptonote/src/InProcessNode/InProcessNode.cpp
+  cryptonote/src/InProcessNode/InProcessNodeErrors.cpp
+  cryptonote/src/NodeRpcProxy/NodeErrors.cpp
+  cryptonote/src/NodeRpcProxy/NodeRpcProxy.cpp
+  cryptonote/src/P2p/NetNodeConfig.cpp
+  cryptonote/src/Serialization/BinaryInputStreamSerializer.cpp
+  cryptonote/src/Serialization/BinaryOutputStreamSerializer.cpp
+  cryptonote/src/Serialization/JsonInputValueSerializer.cpp
+  cryptonote/src/Serialization/JsonOutputStreamSerializer.cpp
+  cryptonote/src/Serialization/KVBinaryInputStreamSerializer.cpp
+  cryptonote/src/Serialization/KVBinaryOutputStreamSerializer.cpp
+  cryptonote/src/Serialization/SerializationOverloads.cpp
+  cryptonote/src/Transfers/BlockchainSynchronizer.cpp
+  cryptonote/src/Transfers/SynchronizationState.cpp
+  cryptonote/src/Transfers/TransfersConsumer.cpp
+  cryptonote/src/Transfers/TransfersContainer.cpp
+  cryptonote/src/Transfers/TransfersSubscription.cpp
+  cryptonote/src/Transfers/TransfersSynchronizer.cpp
+  cryptonote/src/Wallet/LegacyKeysImporter.cpp
+  cryptonote/src/Wallet/WalletAsyncContextCounter.cpp
+  cryptonote/src/Wallet/WalletErrors.cpp
+  cryptonote/src/WalletLegacy/KeysStorage.cpp
+  cryptonote/src/WalletLegacy/WalletLegacy.cpp
+  cryptonote/src/WalletLegacy/WalletHelper.cpp
+  cryptonote/src/WalletLegacy/WalletLegacySerializer.cpp
+  cryptonote/src/WalletLegacy/WalletLegacySerialization.cpp
+  cryptonote/src/WalletLegacy/WalletTransactionSender.cpp
+  cryptonote/src/WalletLegacy/WalletUnconfirmedTransactions.cpp
+  cryptonote/src/WalletLegacy/WalletUserTransactionsCache.cpp
+  cryptonote/src/System/ContextGroup.cpp
+  cryptonote/src/System/Event.cpp
+  cryptonote/src/System/EventLock.cpp
+  cryptonote/src/System/InterruptedException.cpp
+  cryptonote/src/System/Ipv4Address.cpp
+  cryptonote/src/System/TcpStream.cpp
+  cryptonote/src/HTTP/HttpRequest.cpp
+  cryptonote/src/HTTP/HttpParser.cpp
+  cryptonote/src/HTTP/HttpParserErrorCodes.cpp
+  cryptonote/src/HTTP/HttpResponse.cpp
+  cryptonote/src/Rpc/HttpClient.cpp
+  cryptonote/src/Rpc/JsonRpc.cpp
+  cryptonote/src/P2p/NetNode.cpp
+  cryptonote/src/P2p/LevinProtocol.cpp
+  cryptonote/src/P2p/NetNodeConfig.cpp
+  cryptonote/src/P2p/PeerListManager.cpp
+  cryptonote/src/CryptoNoteProtocol/CryptoNoteProtocolHandler.cpp
+  cryptonote/src/Logging/ILogger.cpp
+  cryptonote/src/Logging/LoggerGroup.cpp
+  cryptonote/src/Logging/CommonLogger.cpp
+  cryptonote/src/Logging/LoggerManager.cpp
+  cryptonote/src/Logging/FileLogger.cpp
+  cryptonote/src/Logging/StreamLogger.cpp
+  cryptonote/src/Logging/ConsoleLogger.cpp
+  cryptonote/src/Logging/LoggerMessage.cpp
+  cryptonote/src/Logging/LoggerRef.cpp
+  cryptonote/src/BlockchainExplorer/BlockchainExplorer.cpp
+  cryptonote/src/BlockchainExplorer/BlockchainExplorerDataBuilder.cpp
+  cryptonote/src/BlockchainExplorer/BlockchainExplorerErrors.cpp
 )
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
@@ -184,7 +184,7 @@ if (WIN32)
 	message(FATAL_ERROR "Only MSVC is supported on this platform")
   endif ()
   add_definitions(/D_CRT_SECURE_NO_WARNINGS /D_WIN32_WINNT=0x0600 /DSTATICLIB)
-  include_directories(beldexcoin/src/platform/msc)
+  include_directories(cryptonote/src/platform/msc)
 
   set(PLATFORM_DIR Windows)
   set(BUILD_PLATFORM WIN32)
@@ -192,7 +192,7 @@ if (WIN32)
   set(QTMAIN Qt5::WinMain)
 
 elseif (UNIX)
-  set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} beldexcoin/external/miniupnpc/minissdpc.c)
+  set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} cryptonote/external/miniupnpc/minissdpc.c)
   if (APPLE)
     enable_language(ASM)
     file(GLOB_RECURSE OBJC_SOURCES src/*.mm)
@@ -228,8 +228,8 @@ elseif (UNIX)
   endif (APPLE)
 endif ()
 
-include_directories(beldexcoin/src/Platform/${PLATFORM_DIR})
-file(GLOB PLATFORM_SOURCES beldexcoin/src/Platform/${PLATFORM_DIR}/System/*)
+include_directories(cryptonote/src/Platform/${PLATFORM_DIR})
+file(GLOB PLATFORM_SOURCES cryptonote/src/Platform/${PLATFORM_DIR}/System/*)
 set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} ${PLATFORM_SOURCES})
 
 add_library(${CRYPTONOTE_LIB} STATIC ${CRYPTONOTE_SOURCES})
